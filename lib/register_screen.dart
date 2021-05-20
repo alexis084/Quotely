@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_app/auth_service.dart';
 
-class LoginPage extends StatefulWidget {
+class Register extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterState extends State<Register> {
   String email, password;
 
   final formKey = new GlobalKey<FormState>();
@@ -37,14 +37,14 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         backgroundColor: Colors.red[400],
         elevation: 0.0,
-        title: Text('Login to Notter'),
+        title: Text('Sign up for Notter'),
         actions: [
           TextButton.icon(
             icon: Icon(Icons.person),
-            label: Text('Sign up'),
+            label: Text('Sign in'),
             onPressed: () {
               setState(() {
-                AuthService().setShowLogin(false);
+                AuthService().setShowLogin(true);
               });
             },
           ),
@@ -71,7 +71,10 @@ class _LoginPageState extends State<LoginPage> {
                       child: Container(
                         height: 50.0,
                         child: TextFormField(
-                          decoration: InputDecoration(hintText: 'Email'),
+                          decoration: InputDecoration(
+                            hintText: 'Email',
+                            fillColor: Colors.red,
+                          ),
                           validator: (value) => value.isEmpty
                               ? 'Email is required'
                               : validateEmail(value.trim()),
@@ -104,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                     InkWell(
                       onTap: () {
                         if (checkFields()) {
-                          AuthService().signIn(email, password);
+                          AuthService().signUp(email, password);
                         }
                       },
                       child: Container(
@@ -114,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: Colors.red[400],
                         ),
                         child: Center(
-                          child: Text('Sign in'),
+                          child: Text('Sign up'),
                         ),
                       ),
                     ),
