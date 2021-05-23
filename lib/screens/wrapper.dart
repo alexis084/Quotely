@@ -4,6 +4,7 @@ import 'package:twitter_app/models/user.dart';
 import 'package:twitter_app/screens/auth/signup_screen.dart';
 import 'package:twitter_app/screens/main/home.dart';
 import 'package:twitter_app/screens/main/posts/add.dart';
+import 'package:twitter_app/screens/main/profile/profile.dart';
 
 class Wrapper extends StatelessWidget {
   @override
@@ -21,6 +22,7 @@ class Wrapper extends StatelessWidget {
       routes: {
         '/': (context) => Home(),
         '/add': (context) => Add(),
+        '/profile': (context) => Profile()
       },
     );
   }

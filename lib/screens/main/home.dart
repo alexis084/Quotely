@@ -10,21 +10,36 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: Text('Home'),
         backgroundColor: Colors.purple,
-        actions: [
-          TextButton.icon(
-            label: Text('Sign Out'),
-            icon: Icon(Icons.person),
-            onPressed: () async {
-              _auth.signOut();
-            },
-          ),
-        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, '/add');
         },
         child: Icon(Icons.add),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              child: Text('Drawer header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text('Profile'),
+              onTap: () {
+                Navigator.pushNamed(context, '/profile');
+              },
+            ),
+            ListTile(
+              title: Text('Log Out'),
+              onTap: () async {
+                _auth.signOut();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
