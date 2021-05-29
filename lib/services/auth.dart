@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:twitter_app/models/user.dart';
 
@@ -14,12 +15,14 @@ class AuthService {
 
   Future signUp(String email, String password) async {
     try {
-      User user = (await auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      )) as User;
+      UserCredential user = await auth.createUserWithEmailAndPassword(
+          email: email, password: password);
 
-      _userFromFireBaseUser(user);
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.user.uid)
+          .set({'name': email, 'email': email});
+      _userFromFireBaseUser(user.user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
